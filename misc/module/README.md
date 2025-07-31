@@ -36,7 +36,7 @@ This module creates a `random_string` resource.
 
 | Name   | Description                        | Type   | Default | Required |
 | ------ | ---------------------------------- | ------ | ------- | :------: |
-| `prefix` | A prefix to add to the random string. | `string` | `"test"`  |    no    |
+| `prefix` | A prefix to add to the random string. See [this Markdown link](https://www.google.com) or <a href="https://www.google.com">this HTML link</a> for more info. | `string` | `"test"`  |    no    |
 
 ## Outputs
 
