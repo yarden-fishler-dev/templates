@@ -6,7 +6,7 @@ terraform {
 variable "resource_count" {
   description = "How many null resources to create"
   type        = number
-  default     = 1000
+  default     = 3000
 }
 
 # Index list [0,1,2..]
