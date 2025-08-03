@@ -18,7 +18,7 @@ locals {
 }
 
 resource "null_resource" "bulk" {
-  for_each = toset(local.indices)
+  for_each = toset([for i in local.indices : tostring(i)])
 
   triggers = {
     index         = each.value
