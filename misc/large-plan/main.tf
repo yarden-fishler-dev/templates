@@ -6,7 +6,7 @@ terraform {
 variable "resource_count" {
   description = "How many null resources to create"
   type        = number
-  default     = 3000
+  default     = 1000
 }
 
 # Index list [0,1,2..]
@@ -25,3 +25,22 @@ resource "null_resource" "bulk" {
     redeploy_time = local.redeploy_time
   }
 }
+
+resource "null_resource" "bulk2" {
+  for_each = toset([for i in local.indices : tostring(i)])
+
+  triggers = {
+    index         = each.value
+    redeploy_time = local.redeploy_time
+  }
+}
+
+resource "null_resource" "bulk3" {
+  for_each = toset([for i in local.indices : tostring(i)])
+
+  triggers = {
+    index         = each.value
+    redeploy_time = local.redeploy_time
+  }
+}
+
