@@ -44,3 +44,22 @@ resource "null_resource" "bulk3" {
   }
 }
 
+resource "null_resource" "bulk4" {
+  for_each = toset([for i in local.indices : tostring(i)])
+
+  triggers = {
+    index         = each.value
+    redeploy_time = local.redeploy_time
+  }
+}
+
+
+resource "null_resource" "bulk5" {
+  for_each = toset([for i in local.indices : tostring(i)])
+
+  triggers = {
+    index         = each.value
+    redeploy_time = local.redeploy_time
+  }
+}
+
