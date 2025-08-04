@@ -1,65 +1,14 @@
-terraform {
-  required_version = ">= 0.13"
-}
-
-# Number of null resources to generate
-variable "resource_count" {
-  description = "How many null resources to create"
-  type        = number
-  default     = 1000
-}
-
-# Index list [0,1,2..]
 locals {
-  indices       = [for i in range(var.resource_count) : i]
-  # This value changes every plan/apply run and will therefore force the
-  # resources to be recreated on every re-deployment.
-  redeploy_time = timestamp()
+  # Create a large string by nesting ranges
+  large_content = join("", flatten([
+    for i in range(200) : [
+      for j in range(100) : "Line ${i * 100 + j}: This is substantial content to make the plan larger. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Additional text to increase size significantly.\n"
+    ]
+  ]))
 }
 
-resource "null_resource" "bulk" {
-  for_each = toset([for i in local.indices : tostring(i)])
-
-  triggers = {
-    index         = each.value
-    redeploy_time = local.redeploy_time
-  }
+resource "local_file" "large_files" {
+  count    = 100
+  filename = "${path.module}/large_file_${count.index}.txt"
+  content  = "${local.large_content}_file_${count.index}"
 }
-
-resource "null_resource" "bulk2" {
-  for_each = toset([for i in local.indices : tostring(i)])
-
-  triggers = {
-    index         = each.value
-    redeploy_time = local.redeploy_time
-  }
-}
-
-resource "null_resource" "bulk3" {
-  for_each = toset([for i in local.indices : tostring(i)])
-
-  triggers = {
-    index         = each.value
-    redeploy_time = local.redeploy_time
-  }
-}
-
-resource "null_resource" "bulk4" {
-  for_each = toset([for i in local.indices : tostring(i)])
-
-  triggers = {
-    index         = each.value
-    redeploy_time = local.redeploy_time
-  }
-}
-
-
-resource "null_resource" "bulk5" {
-  for_each = toset([for i in local.indices : tostring(i)])
-
-  triggers = {
-    index         = each.value
-    redeploy_time = local.redeploy_time
-  }
-}
-
