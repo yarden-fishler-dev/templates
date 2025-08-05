@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+      version = "2.5.3"
+    }
+  }
+}
+
 locals {
   # Create a large string by nesting ranges
   large_content = join("", flatten([
@@ -7,7 +16,7 @@ locals {
   ]))
 }
 
-resource "local_file" "large_files" {
+resource "local_sensitive_file" "large_files" {
   count    = 100
   filename = "${path.module}/large_file_${count.index}.txt"
   content  = "${local.large_content}_file_${count.index}"
