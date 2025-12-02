@@ -1,7 +1,7 @@
 resource "null_resource" "null" {
 }
 
-resource "null_resource" "null-resource-not-matching-conventions" {
+resource "null_resource" "null_resource_not_matching_conventions" {
 }
 
 variable "unused_variable" {
