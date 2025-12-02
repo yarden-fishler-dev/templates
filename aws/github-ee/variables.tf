@@ -12,6 +12,8 @@ variable "instance_type" {
 }
 
 variable "vpc_id" {
+  type = string
+}
   description = "The vpc id for this instance"
 }
 
