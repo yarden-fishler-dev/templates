@@ -18,6 +18,11 @@ resource "aws_instance" "github_ee" {
   associate_public_ip_address = true
   availability_zone           = var.availability_zone
 
+  metadata_options {
+    http_tokens = "required"
+    http_endpoint = "enabled"
+  }
+
   ebs_block_device {
     device_name = "/dev/xvdf"
     volume_size = 150
